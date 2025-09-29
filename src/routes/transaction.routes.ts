@@ -1,16 +1,15 @@
 import type { FastifyInstance } from "fastify";
-import { zodToJsonSchema } from "zod-to-json-schema";
 import createTransaction from "../controllers/transactions/createTransaction.controller";
+import { getTransactions } from "../controllers/transactions/getTransactions.controller";
 
-import { createTransactionSchema } from "../schemas/transaction.schema";
-
+//import { createTransactionSchema, getTransactionsSchema } from "../schemas/transaction.schema
 const transactionRoutes = async (fastify: FastifyInstance) => {
+  //Criação
   fastify.route({
     method: "POST",
     url: "/",
     schema: {
-      body: zodToJsonSchema(createTransactionSchema),
-
+      //body: zodToJsonSchema(createTransactionSchema),
       // body: {
       //   type: "object",
       //   required: ["description", "amount", "date", "categoryId", "type"],
@@ -24,6 +23,16 @@ const transactionRoutes = async (fastify: FastifyInstance) => {
       // },
     },
     handler: createTransaction,
+  });
+
+  //Buscar com filtros
+  fastify.route({
+    method: "GET",
+    url: "/",
+    schema: {
+      // querystring: zodToJsonSchema(getTransactionsSchema),
+    },
+    handler: getTransactions,
   });
 };
 
