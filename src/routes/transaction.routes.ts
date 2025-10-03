@@ -3,7 +3,6 @@ import createTransaction from "../controllers/transactions/createTransaction.con
 import { deleteTransaction } from "../controllers/transactions/deleteTransactions.controller";
 import { getTransactions } from "../controllers/transactions/getTransactions.controller";
 import { getTransactionsSummary } from "../controllers/transactions/getTransactionsSummary.controller";
-import { deleteTransactionSchema } from "../schemas/transaction.schema";
 
 //import { createTransactionSchema, getTransactionsSchema } from "../schemas/transaction.schema
 const transactionRoutes = async (fastify: FastifyInstance) => {
