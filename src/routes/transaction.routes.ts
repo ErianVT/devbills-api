@@ -14,7 +14,7 @@ const transactionRoutes = async (fastify: FastifyInstance) => {
     method: "POST",
     url: "/",
     schema: {
-      //body: zodToJsonSchema(createTransactionSchema),
+      // body: zodToJsonSchema(createTransactionSchema),
       // body: {
       //   type: "object",
       //   required: ["description", "amount", "date", "categoryId", "type"],

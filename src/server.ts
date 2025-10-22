@@ -1,12 +1,18 @@
 import app from "./app";
 import { env } from "./config/env";
-import initializeFirebaseAdmin from "./config/firebase";
+import { initializeFirebaseAdmin } from "./config/firebase";
 import { prismaConnect } from "./config/prisma";
 import { initializeGlobalCategories } from "./services/globalCategories.service";
 
 const PORT = env.PORT;
 
-initializeFirebaseAdmin();
+try {
+  // Se o Firebase falhar, vai lançar erro e não inicia o servidor
+  initializeFirebaseAdmin();
+} catch (err) {
+  console.error("Falha ao inicializar Firebase:", err);
+  process.exit(1); // encerra o processo
+}
 
 const startServer = async () => {
   try {

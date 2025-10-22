@@ -11,17 +11,22 @@ const initializeFirebaseAdmin = (): void => {
   }
 
   try {
+    // ✅ CORRIGE A FORMATAÇÃO DA CHAVE PRIVADA
+    const privateKey = FIREBASE_PRIVATE_KEY.replace(/\\n/g, "\n");
+
     admin.initializeApp({
       credential: admin.credential.cert({
         projectId: FIREBASE_PROJECT_ID,
         clientEmail: FIREBASE_CLIENT_EMAIL,
-        privateKey: FIREBASE_PRIVATE_KEY,
+        privateKey: privateKey, // ← Usa a chave formatada
       }),
     });
+
+    console.log("✅ Firebase Admin inicializado com sucesso!");
   } catch (err) {
-    console.error(" Falha ao conectar ao Firebase", err);
+    console.error("❌ Falha ao conectar ao Firebase", err);
     process.exit(1);
   }
 };
 
-export default initializeFirebaseAdmin;
+export { initializeFirebaseAdmin, admin };
