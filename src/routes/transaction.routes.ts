@@ -1,6 +1,7 @@
 import type { FastifyInstance } from "fastify";
 import createTransaction from "../controllers/transactions/createTransaction.controller";
 import { deleteTransaction } from "../controllers/transactions/deleteTransactions.controller";
+import { getHistoricalTransactions } from "../controllers/transactions/getHistoricalTransactions.controller";
 import { getTransactions } from "../controllers/transactions/getTransactions.controller";
 import { getTransactionsSummary } from "../controllers/transactions/getTransactionsSummary.controller";
 import { authMiddleware } from "../middlewares/auth.middlewares";
@@ -15,17 +16,6 @@ const transactionRoutes = async (fastify: FastifyInstance) => {
     url: "/",
     schema: {
       // body: zodToJsonSchema(createTransactionSchema),
-      // body: {
-      //   type: "object",
-      //   required: ["description", "amount", "date", "categoryId", "type"],
-      //   properties: {
-      //     description: { type: "string" },
-      //     amount: { type: "number" },
-      //     date: { type: "string", format: "date-time" },
-      //     categoryId: { type: "string" },
-      //     type: { type: "string", enum: ["expense", "income"] },
-      //   },
-      // },
     },
     handler: createTransaction,
   });
@@ -48,6 +38,16 @@ const transactionRoutes = async (fastify: FastifyInstance) => {
       //querystring: zodToJsonSchema(getTransactionsSummarySchema),
     },
     handler: getTransactionsSummary,
+  });
+
+  //Histórico de Transações
+  fastify.route({
+    method: "GET",
+    url: "/historical",
+    schema: {
+      //querystring: zodToJsonSchema(getHistoricalTransactionsSchema),
+    },
+    handler: getHistoricalTransactions,
   });
 
   //Deletar transação
